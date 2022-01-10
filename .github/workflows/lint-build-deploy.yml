@@ -17,7 +17,15 @@ jobs:
         with:
           node-version: '16.13.0'
 
+      - name: Cache node_modules
+        id: cache-node-modules
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: 1-${{ runner.os }}-node-modules-${{ hashFiles('package-lock.json') }}
+
       - name: Install dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: npm clean-install
 
       - name: Lint (textlint)
@@ -31,9 +39,6 @@ jobs:
 
       - name: Build
         run: npm run build
-
-      - name: Confirm
-        run: ls ./build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
