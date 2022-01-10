@@ -6,9 +6,11 @@ sidebar_position: 1
 
 Add **Markdown or React** files to `src/pages` to create a **standalone page**:
 
+<!-- textlint-disable jtf-style/4.3.7.山かっこ<> -->
 - `src/pages/index.js` -> `localhost:3000/`
 - `src/pages/foo.md` -> `localhost:3000/foo`
 - `src/pages/foo/bar.js` -> `localhost:3000/foo/bar`
+<!-- textlint-enable jtf-style/4.3.7.山かっこ<> -->
 
 ## Create your first React Page
 
