@@ -6,8 +6,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 (module.exports = {
   title: 'Knowledge',
   tagline: '',
-  url: 'https://dodo-lab.github.io/knowledge/',
-  baseUrl: '/',
+  url: 'https://dodo-lab.github.io',
+  baseUrl: '/knowledge/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
@@ -53,7 +53,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
         items: [
           {
             type: 'doc',
-            docId: 'intro',
+            docId: 'top',
             position: 'left',
             label: 'Docs',
           },
