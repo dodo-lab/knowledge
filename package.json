@@ -15,7 +15,6 @@
     "lint": "run-s --print-name --continue-on-error lint:*",
     "lint:text": "textlint \"*.md\" \"*.mdx\" \"!(node_modules|build)/**/*.md\" \"!(node_modules|build)/**/*.mdx\"",
     "lint:md": "markdownlint-cli2 \"**/*.md\" \"**/*.mdx\" \"#README.md\" \"#node_modules\" \"#build\"",
-    "lint:tsc": "tsc --noEmit",
     "lint:css": "stylelint \"src/**/*.css\"",
     "fix": "run-s --print-name --continue-on-error fix:*",
     "fix:text": "textlint --fix \"*.md\" \"*.mdx\" \"!(node_modules|build)/**/*.md\" \"!(node_modules|build)/**/*.mdx\"",
