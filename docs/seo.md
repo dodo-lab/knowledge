@@ -37,6 +37,22 @@ Webサイト内のページや動画などのファイルに関する情報や�
 
 Googleに対してのみ有効な指定。`noindex`や`nofollow`の意味は上記と同様。
 
-### Google tag
+## Web Vitals
 
+Web Vitalsは、Web上のエンドユーザーのページ体験を測定するための統一されたガイダンスと指標で、Googleによって作成された。
 
+Core Web Vitalsは、Web Vitalsのサブセットで、`Loading`・`Interactivity`・`Visual Stability`を測定する3つの指標で構成されている。
+
+- Largest Contentful Paint (LCP)
+
+  ページの読み込み性能の指標。
+
+- First Input Delay (FID)
+
+  エンドユーザーがWebページを操作する際の体感速度を表す指標。
+
+- Cumulative Layout Shift (CLS)
+
+  全体的なレイアウトの安定性を示す指標。
+
+この3つの指標で高いスコアを獲得することにより、検索エンジンのランキングに影響を与え、上位に表示される可能性がある。
