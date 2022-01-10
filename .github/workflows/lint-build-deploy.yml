@@ -1,0 +1,39 @@
+name: Deploy
+
+on: [workflow_dispatch]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.13.0'
+
+      - name: Install dependencies
+        run: npm clean-install
+
+      - name: Lint (textlint)
+        run: npm run lint:text
+
+      - name: Lint (markdownlint)
+        run: npm run lint:md
+
+      - name: Lint (stylelint)
+        run: npm run lint:css
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
