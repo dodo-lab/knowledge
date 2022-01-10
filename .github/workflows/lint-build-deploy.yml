@@ -32,6 +32,9 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Confirm
+        run: ls ./build
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
