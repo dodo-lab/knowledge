@@ -56,3 +56,9 @@ Core Web Vitalsは、Web Vitalsのサブセットで、`Loading`・`Interactivit
   全体的なレイアウトの安定性を示す指標。
 
 この3つの指標で高いスコアを獲得することにより、検索エンジンのランキングに影響を与える。
+
+## リンク
+
+- [PageSpeed Insights](https://pagespeed.web.dev/?utm_source=psi&utm_medium=redirect)
+
+  Googleから提供されており、Webページのパフォーマンスに関するレポートと、改善方法が確認できる。
