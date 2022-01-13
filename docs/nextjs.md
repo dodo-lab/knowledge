@@ -34,8 +34,10 @@ npx create-next-app [project-name] --typescript
 
   テスト環境用。`NODE_ENV`に`test`が設定されている場合に有効。`.env.local`に上書きされない特徴がある。
 
+:::info
 環境変数は基本的に`getStaticProps`や`getServerSideProps`といったSGのビルド／SSRのタイミングで参照可能。
-ただし、変数名の先頭に`NEXT_PUBLIC_`を付与することで、クライアント側でも参照可能になる。
+ただし、変数名の先頭に`NEXT_PUBLIC_`を付与するとインライン展開され、クライアント側でも参照可能になる。
+:::
 
 ## Tips
 
