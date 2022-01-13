@@ -12,6 +12,27 @@ npx create-next-app [project-name]
 npx create-next-app [project-name] --typescript
 ```
 
+## 環境変数
+
+次の環境変数定義用ファイルに記述することで、利用可能。
+
+- .env.development
+
+  開発環境用。`next dev`で有効になる。
+
+- .env.production
+
+  本番環境用。`next start`で有効になる。
+
+- .env.local
+
+  ローカル環境用で、`.env.development`や`.env.production`の内容を上書きする。そのため、`.gitignore`でGit管理対象外にしておくべき。
+
+  基本的には`.env.development`をチーム内で共有しておけば事足りるはずだが、個人的に試したいことがある際に有用。
+
+環境変数は基本的に`getStaticProps`や`getServerSideProps`といったSGのビルド／SSRのタイミングで参照可能。
+ただし、変数名の先頭に`NEXT_PUBLIC_`を付与することで、クライアント側でも参照可能になる。
+
 ## Tips
 
 - `getStaticProps`はビルド時のみ実行されるが、開発中（`next dev`）に限ってはリクエストごとに実行される。
