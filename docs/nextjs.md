@@ -14,7 +14,7 @@ npx create-next-app [project-name] --typescript
 
 ## 環境変数
 
-次の環境変数定義用ファイルに記述することで、利用可能。
+次の環境変数の定義用ファイルに記述することで、利用可能。
 
 - `.env.development`
 
