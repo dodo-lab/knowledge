@@ -1,6 +1,5 @@
 ---
 title: Next.js
-sidebar_position: 5
 ---
 
 ## プロジェクト作成

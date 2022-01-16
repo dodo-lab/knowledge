@@ -1,6 +1,5 @@
 ---
 title: SEO
-sidebar_position: 10
 ---
 
 ## robots.txt
