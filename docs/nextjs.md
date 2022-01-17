@@ -38,6 +38,25 @@ npx create-next-app [project-name] --typescript
 ただし、変数名の先頭に`NEXT_PUBLIC_`を付与するとインライン展開され、クライアント側でも参照可能になる。
 :::
 
+## パフォーマンス計測
+
+カスタムAppコンポーネントを作成し、以下のようにreportWebVitals関数をエクスポートすることで計測。
+ログ出力しているが、アナリティクスへ送信して後から追跡することも可能。
+
+```ts title=pages/_app.js
+export function reportWebVitals(metric) {
+  console.log(metric);
+}
+
+function CustomApp({ Component, pageProps }) {
+  return <Component {...pageProps} />;
+}
+
+export default CustomApp;
+```
+
+詳細は[公式](https://nextjs-ja-translation-docs.vercel.app/docs/advanced-features/measuring-performance)を参照。
+
 ## Tips
 
 - `getStaticProps`はビルド時のみ実行されるが、開発中（`next dev`）に限ってはリクエストごとに実行される。
