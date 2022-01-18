@@ -57,6 +57,50 @@ export default CustomApp;
 
 詳細は[公式](https://nextjs-ja-translation-docs.vercel.app/docs/advanced-features/measuring-performance)を参照。
 
+## デバッグ
+
+### Step 1：デバッグモードでNext.jsを起動
+
+環境変数`NODE_OPTIONS`に`--inspect`を指定の上、`next dev`で実行する。
+
+下記のように、`package.json`にデバッグ用のスクリプトを定義しておくと便利。
+
+```json title=package.json
+"scripts": {
+  "debug": "cross-env NODE_OPTIONS='--inspect' next dev",
+}
+```
+
+### Step 2：デバッグ開始
+
+Chrome Devtools、VSCodeの2パターンある。
+
+- Chrome Devtools
+
+  1. Chromeで`chrome://inspect`にアクセスすると、Remote Targetに起動しているNext.jsアプリが表示される
+  2. Next.jsアプリの`inspect`をクリックし、デバッグ開始
+
+- VSCode
+
+  1. `.vscode/launch.json`ファイルを作成
+
+     ```json title=.vscode/launch.json
+     {
+       "version": "0.2.0",
+       "configurations": [
+         {
+           "type": "node",
+           "request": "attach",
+           "name": "Launch Program",
+           "skipFiles": ["<node_internals>/**"],
+           "port": 9229
+         }
+       ]
+     }
+     ```
+
+  2. `F5`を押下し、デバッグ開始
+
 ## Tips
 
 - `getStaticProps`はビルド時のみ実行されるが、開発中（`next dev`）に限ってはリクエストごとに実行される。
