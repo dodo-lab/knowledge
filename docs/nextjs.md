@@ -59,7 +59,7 @@ export default CustomApp;
 
 ## デバッグ
 
-### Step 1：デバッグモードでNext.jsを起動
+### Step 1：Next.jsアプリを起動
 
 環境変数`NODE_OPTIONS`に`--inspect`を指定の上、`next dev`で実行する。
 
@@ -67,7 +67,7 @@ export default CustomApp;
 
 ```json title=package.json
 "scripts": {
-  "debug": "cross-env NODE_OPTIONS='--inspect' next dev",
+  "dev": "cross-env NODE_OPTIONS='--inspect' next dev",
 }
 ```
 
@@ -89,11 +89,22 @@ Chrome Devtools、VSCodeの2パターンある。
        "version": "0.2.0",
        "configurations": [
          {
+           "name": "Next: Server",
            "type": "node",
            "request": "attach",
-           "name": "Launch Program",
            "skipFiles": ["<node_internals>/**"],
            "port": 9229
+         },
+         {
+           "name": "Next: Client",
+           "type": "pwa-chrome",
+           "request": "launch",
+           "url": "http://localhost:3000",
+           "webRoot": "${workspaceFolder}",
+           "sourceMaps": true,
+           "sourceMapPathOverrides": {
+             "webpack://_N_E/*": "${webRoot}/*"
+           }
          }
        ]
      }
