@@ -55,7 +55,7 @@ function CustomApp({ Component, pageProps }) {
 export default CustomApp;
 ```
 
-詳細は[公式](https://nextjs-ja-translation-docs.vercel.app/docs/advanced-features/measuring-performance)を参照。
+詳細は[公式](https://nextjs.org/docs/advanced-features/measuring-performance)を参照。
 
 ## デバッグ
 
