@@ -8,7 +8,8 @@ title: docker-composeの具体例
 version: '3.8'
 
 services:
-  db:
+  mysql:
+    container_name: mysql
     image: mysql:5.7.36
     environment:
       MYSQL_DATABASE: db_name
@@ -21,9 +22,12 @@ services:
       - db:/var/lib/mysql
 
   phpmyadmin:
+    container_name: phpmyadmin
     image: phpmyadmin/phpmyadmin:5.1.1
+    environment:
+      - PMA_HOST=mysql
     depends_on:
-      - db
+      - mysql
     ports:
       - '8080:80'
 
