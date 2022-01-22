@@ -57,6 +57,22 @@ export default CustomApp;
 
 詳細は[公式](https://nextjs.org/docs/advanced-features/measuring-performance)を参照。
 
+## パフォーマンス改善
+
+### Router.prefetch
+
+ページ遷移を高速化するために、ページをプリフィッチ（事前に読み込み）する。
+
+```ts
+import Router from 'next/router';
+
+Router.prefetch(url, as);
+```
+
+:::info
+`next/link`を用いないページ遷移のみ有用。というのも、`next/link`は自動的にページをプリフェッチしているため、`Router.prefetch`が不要。
+:::
+
 ## デバッグ
 
 ### Step 1：Next.jsアプリを起動
