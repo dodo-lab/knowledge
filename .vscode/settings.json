@@ -1,7 +1,10 @@
 {
   "cSpell.words": [
+    "Certbot",
+    "certonly",
     "choco",
     "Contentful",
+    "epel",
     "Googlebot",
     "mkcert",
     "noindex",

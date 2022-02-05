@@ -21,3 +21,26 @@ sudo yum install -y nodejs
   ../configure --prefix=/usr --disable-profile --enable-add-ons --with-headers=/usr/include --with-binutils=/usr/bin
   make && make install
   ```
+
+## Let's Encryptで証明書を作成
+
+- Certbotクライアントをインストール
+
+  ```bash title=コマンド実行
+  sudo yum install epel-release
+  sudo yum install certbot
+  ```
+
+- 証明書を作成
+
+  ```bash title=コマンド実行
+  certbot certonly --standalone -d www.example.com
+  ```
+
+  コマンド実行後にメールアドレスの入力や、利用規約への同意が求められるため、適宜対応する。
+
+  :::warning
+  失敗した場合は下記項目をチェック。
+  - 80ポートや443ポートが他のプロセスやサービスに利用されている場合、該当のプロセスやサービスを一時停止する
+  - 80ポートや443ポートがファイアーウォールでブロックされている場合、該当ポートへのアクセスを許可する
+  :::
