@@ -4,7 +4,7 @@ title: VPS
 
 ## Node.jsのインストール
 
-```bash
+```bash title=コマンド実行
 sudo curl -sL https://rpm.nodesource.com/setup_16.x | bash -
 sudo yum install -y nodejs
 ```
