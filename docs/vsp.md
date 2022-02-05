@@ -33,11 +33,14 @@ sudo yum install -y nodejs
 
 - 証明書を作成
 
+  ドメインは仮で`www.example.com`とする。
+
   ```bash title=コマンド実行
   certbot certonly --standalone -d www.example.com
   ```
 
   コマンド実行後にメールアドレスの入力や、利用規約への同意が求められるため、適宜対応する。
+  成功したら、`/etc/letsencrypt/live/www.example.com/`に各種証明書ファイルが生成される。
 
   :::warning
   失敗した場合は下記項目をチェック。
