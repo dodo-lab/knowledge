@@ -128,6 +128,80 @@ Chrome Devtools、VSCodeの2パターンある。
 
   2. `F5`を押下し、デバッグ開始
 
+## 開発環境のSSL化
+
+### 証明局と証明書の準備
+
+- 証明局の準備
+
+  以下のコマンドを管理者権限で実行。
+
+  ```bash
+  choco install mkcert
+  mkcert -install
+  ```
+
+- 証明書の作成
+
+  Next.jsプロジェクト内の任意の場所で以下のコマンドを実行。
+
+  ```bash
+  # 引数はドメイン名やIPを指定
+  mkcert localhost 127.0.0.1
+  ```
+
+  ファイルが作成されるため、以下のようにファイル名を変更しておく。
+
+  ```text
+  localhost+1.pem → cert.pem
+  localhost+1-key.pem → key.pem
+  ```
+
+### カスタムサーバーの準備
+
+- Next.jsプロジェクトの直下に`server.js`を作成
+
+  ```js title=server.js
+  const { createServer } = require('https');
+  const { parse } = require('url');
+  const next = require('next');
+  const fs = require('fs');
+
+  const dev = process.env.NODE_ENV !== 'production';
+  const hostname = dev ? 'localhost' : 'example.com';
+  const port = dev ? 3000 : 443;
+  const app = next({ dev, hostname, port });
+  const handle = app.getRequestHandler();
+
+  const httpsOptions = {
+    key: fs.readFileSync('./cert/key.pem'),
+    cert: fs.readFileSync('./cert/cert.pem'),
+  };
+
+  app.prepare().then(() => {
+    createServer(httpsOptions, (req, res) => {
+      const parsedUrl = parse(req.url, true);
+      handle(req, res, parsedUrl);
+    }).listen(port, (err) => {
+      if (err) throw err;
+      console.log(`> Ready on https://${hostname}:${port}`);
+    });
+  });
+  ```
+
+### 実行
+
+- `package.json`を書き換える
+
+  ``` diff json title=package.json
+  "scripts": {
+  - "dev": "next dev",
+  + "dev": "node server.js",
+  }
+  ```
+
+- `npm run dev`で実行
+
 ## Tips
 
 - `getStaticProps`はビルド時のみ実行されるが、開発中（`next dev`）に限ってはリクエストごとに実行される。
