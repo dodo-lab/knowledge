@@ -15,6 +15,7 @@
     "noindex",
     "prefetch",
     "remi",
-    "xmlphp"
+    "xmlphp",
+    "xorg"
   ]
 }

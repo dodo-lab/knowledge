@@ -147,3 +147,11 @@ sudo yum --enablerepo=remi,remi-php73 install phpMyAdmin
 ```bash title=コマンド実行
 systemctl restart httpd
 ```
+
+## puppeteerの依存関係解消
+
+```bash title=コマンド実行
+sudo yum install -y alsa-lib.x86_64 atk.x86_64 cups-libs.x86_64 gtk3.x86_64 ipa-gothic-fonts libXcomposite.x86_64 libXcursor.x86_64 libXdamage.x86_64 libXext.x86_64 libXi.x86_64 libXrandr.x86_64 libXScrnSaver.x86_64 libXtst.x86_64 pango.x86_64 xorg-x11-fonts-100dpi xorg-x11-fonts-75dpi xorg-x11-fonts-cyrillic xorg-x11-fonts-misc xorg-x11-fonts-Type1 xorg-x11-utils
+```
+
+詳細は[公式](https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md#chrome-headless-doesnt-launch-on-unix)を参照。
