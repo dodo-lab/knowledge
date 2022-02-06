@@ -65,6 +65,22 @@ sudo yum install -y nodejs
   sudo yum -y install mysql-community-server
   ```
 
+- MySQLの設定
+
+  ```conf title=/etc/my.cnf
+  [mysqld]
+  innodb_autoinc_lock_mode=0
+  ```
+
+  :::info
+  `/etc/my.cnf`が無い場合は、`mysql --help | grep my.cnf`を実行し、最初にヒットした`my.cnf`を修正する。
+  :::
+
+  :::warning
+  上記設定はパフォーマンスが落ちるため、必要でなければ設定しない方が良い。
+  今回は`INSERT IGNORE`で`AUTO_INCREMENT`を加算したくないため、設定している。
+  :::
+
 ### MySQLの起動
 
 - MySQL起動
