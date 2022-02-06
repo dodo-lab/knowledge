@@ -4,12 +4,17 @@
     "certonly",
     "choco",
     "Contentful",
+    "enablerepo",
     "epel",
     "Googlebot",
     "letsencrypt",
+    "mbstring",
     "mkcert",
     "mysqld",
+    "mysqlnd",
     "noindex",
-    "prefetch"
+    "prefetch",
+    "remi",
+    "xmlphp"
   ]
 }

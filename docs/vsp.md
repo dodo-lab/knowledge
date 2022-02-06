@@ -116,3 +116,34 @@ sudo yum install -y nodejs
   ```bash title=コマンド実行
   grant select, update on [DB名].* to 'user_name'@'localhost' identified by 'password';
   ```
+
+## phpMyAdminの導入
+
+### phpMyAdminを含め必要なものをインストール
+
+```bash title=コマンド実行
+sudo rpm --import https://rpms.remirepo.net/RPM-GPG-KEY-remi
+sudo yum install yum-utils https://rpms.remirepo.net/enterprise/remi-release-7.rpm
+sudo yum --enablerepo=remi,remi-php73 install php-7.3.33-1.el7.remi
+sudo yum -y install --enablerepo=remi,remi-php73 php-mbstring php-xmlphp-pdo php-mysqlnd
+sudo yum --enablerepo=remi,remi-php73 install phpMyAdmin
+```
+
+### phpMyAdminの設定
+
+アクセス許可するIPアドレスを設定する。
+
+```diff conf title=/etc/httpd/conf.d/phpMyAdmin.conf
+<Directory /usr/share/phpMyAdmin/>
+   AddDefaultCharset UTF-8
+
+   Require local
++  Require ip [アクセスを許可するIP]
+</Directory>
+```
+
+### Apacheを再起動
+
+```bash title=コマンド実行
+systemctl restart httpd
+```
