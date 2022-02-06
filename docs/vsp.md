@@ -47,3 +47,72 @@ sudo yum install -y nodejs
   - 80ポートや443ポートが他のプロセスやサービスに利用されている場合、該当のプロセスやサービスを一時停止する
   - 80ポートや443ポートがファイアーウォールでブロックされている場合、該当ポートへのアクセスを許可する
   :::
+
+## MySQLの導入
+
+### MySQLのインストール
+
+- 最新のGPGキーをインストール
+
+  ```bash title=コマンド実行
+  sudo rpm --import https://repo.mysql.com/RPM-GPG-KEY-mysql-2022
+  ```
+
+- MySQLのインストール
+
+  ```bash title=コマンド実行
+  sudo rpm -Uvh http://dev.mysql.com/get/mysql57-community-release-el7-7.noarch.rpm
+  sudo yum -y install mysql-community-server
+  ```
+
+### MySQLの起動
+
+- MySQL起動
+
+  ```bash title=コマンド実行
+  systemctl start mysqld.service
+  ```
+
+- MySQL自動起動設定
+
+  ```bash title=コマンド実行
+  systemctl enable mysqld.service
+  ```
+
+### rootパスワードの変更
+
+- パスワードの変更
+
+  まず初期パスワードを確認する。
+
+  ```bash title=コマンド実行
+  cat /var/log/mysqld.log | grep "A temporary password"
+  ```
+
+  次にパスワードを変更する。
+
+  ```bash title=コマンド実行
+  mysql -u root -p
+  # パスワード入力を求められるため、確認した初期パスワードを入力
+  set password for root@localhost=password('パスワード');
+  ```
+
+### 初期設定
+
+- DBの作成
+
+  ```bash title=コマンド実行
+  create database [DB名];
+  ```
+
+- ユーザーの作成
+
+  ```bash title=コマンド実行
+  create user 'user_name'@'localhost' IDENTIFIED BY 'password';
+  ```
+
+- ユーザーの権限を作成したDBのみに絞る
+
+  ```bash title=コマンド実行
+  grant select, update on [DB名].* to 'user_name'@'localhost' identified by 'password';
+  ```
