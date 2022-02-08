@@ -171,3 +171,42 @@ sudo yum install -y alsa-lib.x86_64 atk.x86_64 cups-libs.x86_64 gtk3.x86_64 ipa-
 ```
 
 詳細は[公式](https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md#chrome-headless-doesnt-launch-on-unix)を参照。
+
+## Next.jsの永続化
+
+Next.jsのプロセスを監視し、プロセスが異常状態になったら自動的に再起動をさせる。
+
+- PM2のインストール
+
+  ```bash title=コマンド実行
+  npm i -g pm2
+  ```
+
+- Next.jsを起動（永続化）
+
+  `npm start`でNext.jsが起動することを前提とする。
+
+  ```bash title=コマンド実行
+  pm2 start npm --name "アプリ名" -- start
+  ```
+
+- Next.jsの停止
+
+  ```bash title=コマンド実行
+  pm2 stop アプリ名
+  ```
+
+- Next.jsのログ確認
+
+  ```bash title=コマンド実行
+  pm2 log アプリ名
+
+  # ログの表示行数を増やす
+  pm2 log アプリ名 --line 100
+  ```
+
+- Next.jsの状態確認
+
+  ```bash title=コマンド実行
+  pm2 show アプリ名
+  ```
