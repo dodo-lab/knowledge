@@ -53,6 +53,11 @@ function CustomApp({ Component, pageProps }) {
 }
 
 export default CustomApp;
+
+// TypeScriptの場合
+export function reportWebVitals(metric: NextWebVitalsMetric) {
+  console.log(metric);
+}
 ```
 
 詳細は[公式](https://nextjs.org/docs/advanced-features/measuring-performance)を参照。
