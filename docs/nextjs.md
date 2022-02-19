@@ -4,12 +4,24 @@ title: Next.js
 
 ## プロジェクト作成
 
-```bash
-npx create-next-app [project-name]
+### 新規作成
+
+```bash title=コマンド実行
+npx create-next-app [Project-Name]
 
 # TypeScriptならこっち
-npx create-next-app [project-name] --typescript
+npx create-next-app [Project-Name] --typescript
 ```
+
+### テンプレートから作成
+
+```bash title=コマンド実行
+npx create-next-app [Project-Name] --example [GitHub-URL]
+```
+
+:::warning
+`[GitHub-URL]`には`.git`を含めない
+:::
 
 ## 環境変数
 
@@ -141,7 +153,7 @@ Chrome Devtools、VSCodeの2パターンある。
 
   以下のコマンドを管理者権限で実行。
 
-  ```bash
+  ```bash title=コマンド実行
   choco install mkcert
   mkcert -install
   ```
@@ -150,7 +162,7 @@ Chrome Devtools、VSCodeの2パターンある。
 
   Next.jsプロジェクト内の任意の場所で以下のコマンドを実行。
 
-  ```bash
+  ```bash title=コマンド実行
   # 引数はドメイン名やIPを指定
   mkcert localhost 127.0.0.1
   ```
