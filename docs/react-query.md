@@ -48,3 +48,16 @@ const GlobalFetchingIndicator: React.FC = () => {
 :::info
 実装例では`mui`を使用している。
 :::
+
+### 新たなフェッチ中に古いデータを表示
+
+SPA等でページや一部コンテンツを切替える際、フェッチ中は古いデータを表示しておきたいケース。
+
+`config`の`keepPreviousData`に`true`を設定することで実現可能。
+
+```ts title=Reactのコンポーネント内
+// isPreviousDataがtrueなら古いdataを返している
+const { data, isPreviousData } = useQuery(['page', page], getPageContents, {
+  keepPreviousData: true
+});
+```
