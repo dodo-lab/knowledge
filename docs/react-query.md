@@ -26,3 +26,25 @@ const { data: department } = useQuery(
   }
 )
 ```
+
+### グローバルなインジケータ
+
+いずれかのフェッチ中にグローバルなインジケータを表示したい場合、次のように`useIsFetching`を利用することで実現可能。
+
+```ts
+import {CircularProgress} from '@mui/material';
+import React from 'react';
+import {useIsFetching} from 'react-query';
+
+const GlobalFetchingIndicator: React.FC = () => {
+  const isFetching = useIsFetching();
+
+  return isFetching ? (
+    <CircularProgress sx={{position: 'absolute', top: 10, right: 10}} size={24} />
+  ) : null;
+};
+```
+
+:::info
+実装例では`mui`を使用している。
+:::
