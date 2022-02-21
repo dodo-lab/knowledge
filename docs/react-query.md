@@ -61,3 +61,15 @@ const { data, isPreviousData } = useQuery(['page', page], getPageContents, {
   keepPreviousData: true
 });
 ```
+
+### initialDataとplaceholderDataの使い分け
+
+- initialData
+
+  期待するクエリのレスポンスをすでにアプリ側で保持している場合に使用。
+  `config.initialData`にデータを設定することで、データがキャッシュに保存され、初回のロードをスキップする。
+
+- placeholderData
+
+  クエリのレスポンスを待たず、疑似レスポンスをレイアウトへ反映したい場合に使用。
+  `initialData`と似ているが、こちらはキャッシュに保存されない。あくまでクエリの実行結果が返ってくるまでのレンダリングに使う一時的なデータ。
