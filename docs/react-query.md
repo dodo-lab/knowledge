@@ -73,3 +73,15 @@ const { data, isPreviousData } = useQuery(['page', page], getPageContents, {
 
   クエリのレスポンスを待たず、疑似レスポンスをレイアウトへ反映したい場合に使用。
   `initialData`と似ているが、こちらはキャッシュに保存されない。あくまでクエリの実行結果が返ってくるまでのレンダリングに使う一時的なデータ。
+
+### 事前にクエリをキャッシュする
+
+実行される可能性のあるクエリを予測できるのであれば、事前にキャッシュをしておくことでUXを向上できる。
+事前にキャッシュをするには、`prefetchQuery`を使用する。
+
+```ts title=Reactのコンポーネント内
+const queryClient = useQueryClient();
+const prefetchAccount = async () => {
+  await queryClient.prefetchQuery(['account', email], getAccountByEmail);
+};
+```
