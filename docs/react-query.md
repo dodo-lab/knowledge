@@ -85,3 +85,57 @@ const prefetchAccount = async () => {
   await queryClient.prefetchQuery(['account', email], getAccountByEmail);
 };
 ```
+
+### Queryで取得したデータを変換
+
+`useQuery`などで取得したデータを変換する手段は次のとおり。
+
+- `queryFn`内での変換
+
+  ```ts
+  const getTodos = async (): Promise<Todo[]> => {
+    const res = await axios.get<Todo[]>('todos');
+    return res.data.map(todo => todo.name.toUpperCase());
+  }
+
+  export const useGetTodos = () => useQuery('todos', getTodos);
+  ```
+
+- カスタムフックで変換
+
+  ```ts
+  const getTodos = async (): Promise<Todo[]> => {
+    const res = await axios.get<Todo[]>('todos');
+    return res.data;
+  }
+
+  export const useGetTodos = () => {
+    const query = useQuery('todos', getTodos)
+
+    return {
+      ...query,
+      data: useMemo(
+        () => query.data?.map(todo => todo.name.toUpperCase()),
+        [query.data]
+      ),
+    }
+  }
+  ```
+
+- `useQuery`の`select`オプションで変換
+
+  ```ts
+  const getTodos = async (): Promise<Todo[]> => {
+    const res = await axios.get<Todo[]>('todos');
+    return res.data;
+  }
+
+  export const useGetTodos = () => {
+    return useQuery('todos', getTodos, {
+      select: useCallback(
+        (data: Todo[]) => data.map(todo => todo.name.toUpperCase()),
+        []
+      ),
+    })
+  }
+  ```
