@@ -139,3 +139,60 @@ const prefetchAccount = async () => {
     })
   }
   ```
+
+### 再レンダリングを抑制
+
+`useQuery`を使うと、`isLoading`や`isFetching`などのパラメータが更新されるたびに再レンダリングされる。
+
+これを抑制するには、次の手段がある。
+
+- `notifyOnChangeProps`オプションで、再レンダリング対象のパラメータを指定
+
+  ```ts title=dataが更新された時だけ再レンダリング
+  const { data } = useQuery(['account', email], getAccountByEmail, {
+    notifyOnChangeProps: ['data'],
+  });
+  ```
+
+  :::warning
+  上記の例で、`isLoading`や`error`などをレンダリングに反映したい場合は都度`notifyOnChangeProps`を更新する必要があるため、次のようなデメリットがある。
+  - メンテナンスコストの増加
+  - 更新漏れがあった際に、レンダリングに反映されない不具合が発生
+  :::
+
+- `notifyOnChangeProps`オプションで、`'tracked'`を指定
+
+  `'tracked'`の指定により、レンダリングに使用しているパラメータを追跡し、必要なパラメータが更新された時のみ再レンダリングする。
+
+  ```ts title=dataとisLoadingが更新された時だけ再レンダリング
+  const { data, isLoading } = useQuery(['account', email], getAccountByEmail, {
+    notifyOnChangeProps: 'tracked',
+  });
+
+  return (
+    <>
+      {isLoading && <p>Loading...</p>}
+      {data && <p>data.name</p>}
+    </>
+  );
+  ```
+
+  次のように、グローバルに適用することも可能。
+
+  ```ts
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        notifyOnChangeProps: 'tracked',
+      },
+    },
+  });
+
+  function App() {
+    return (
+      <QueryClientProvider client={queryClient}>
+        <Example />
+      </QueryClientProvider>
+    )
+  }
+  ```
