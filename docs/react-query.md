@@ -196,3 +196,19 @@ const prefetchAccount = async () => {
     )
   }
   ```
+
+### QueryKeyの管理
+
+`useQuery`や`queryClient.invalidateQueries`などの引数に渡す`QueryKey`を直値で指定すると、管理が煩雑になる。
+
+その解消方法（管理手法）の1つとして、次のような`QueryKey`のファクトリがある。
+
+```ts
+export const todoKeys = {
+  all: ['todos'] as const,
+  lists: () => [...todoKeys.all, 'list'] as const,
+  list: (filters: string) => [...todoKeys.lists(), { filters }] as const,
+  details: () => [...todoKeys.all, 'detail'] as const,
+  detail: (id: number) => [...todoKeys.details(), id] as const,
+}
+```
