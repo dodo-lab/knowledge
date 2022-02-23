@@ -212,3 +212,19 @@ export const todoKeys = {
   detail: (id: number) => [...todoKeys.details(), id] as const,
 }
 ```
+
+### グローバルまたは特定QueryKeyのデフォルトオプション
+
+```ts
+const queryClient = new QueryClient({
+  // グローバルなデフォルトオプション
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 20,
+    },
+  },
+})
+
+// 特定QueryKeyのデフォルトオプション
+queryClient.setQueryDefaults(todoKeys.all, { staleTime: 1000 * 60 })
+```
