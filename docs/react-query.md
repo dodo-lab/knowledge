@@ -228,3 +228,30 @@ const queryClient = new QueryClient({
 // 特定QueryKeyのデフォルトオプション
 queryClient.setQueryDefaults(todoKeys.all, { staleTime: 1000 * 60 })
 ```
+
+### グローバルなエラーハンドリング
+
+QueryClientに渡すQueryCacheをカスタマイズすることで実現可能。
+
+```ts
+const queryClient = new QueryClient({
+  queryCache: new QueryCache({
+    onError: (error) =>
+      // Error Handling
+  }),
+})
+```
+
+Queryの状況に応じたエラーハンドリングも可能。
+
+```ts
+const queryClient = new QueryClient({
+  queryCache: new QueryCache({
+    onError: (error, query) =>
+      // 初回のフェッチに失敗した時だけエラー処理
+      if (query.state.data !== undefined) {
+        // Error Handling
+      }
+  }),
+})
+```
