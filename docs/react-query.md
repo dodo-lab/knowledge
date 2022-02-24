@@ -267,7 +267,7 @@ const queryClient = new QueryClient({
   ```ts
   const usePostTodo = () => {
     const queryClient = useQueryClient();
-    return useMutation(['todos'], {
+    return useMutation(postTodo, {
       onSuccess: () => {
         queryClient.invalidateQueries(['todos', 'list'])
       }
