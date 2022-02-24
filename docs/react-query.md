@@ -255,3 +255,36 @@ const queryClient = new QueryClient({
   }),
 })
 ```
+
+### コールバックの生存期間
+
+次の2つはコールバックの生存期間が異なる。
+
+- `useMutation`に指定する`onSuccess`
+
+  必ずコールされる。
+
+  ```ts
+  const usePostTodo = () => {
+    const queryClient = useQueryClient();
+    return useMutation(['todos'], {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['todos', 'list'])
+      }
+    })
+  }
+  ```
+
+- `useMutation`で取得した`mutate`に指定する`onSuccess`
+
+  `mutate`を使用しているコンポーネントがアンマウントされていなければ、コールされる。
+
+  ```ts
+  const postTodo = usePostTodo();
+  postTodo.mutate(
+    {title: 'new title'},
+    {
+      onSuccess: () => alert('Todo successfully added'),
+    }
+  );
+  ```
