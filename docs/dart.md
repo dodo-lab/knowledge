@@ -19,3 +19,22 @@ late String userName = _loadUserName();
 ### 引数のデフォルト値の非推奨事項
 
 引数のデフォルト値を設定するために、古い記述のコードでは`:`（コロン）が使われている場合がある。現在は`=`が推奨されており、`:`は非サポートになる可能性がある。
+
+### 戻り値を指定しない関数
+
+戻り値を指定しない関数は`NULL`を返却する。
+
+```dart
+foo() {}
+assert(foo() == null);
+```
+
+### 型の検証
+
+`object is Type`と`object.runtimeType == Type`の2パターンで型の検証が可能だが、前者（`object is Type`）の方がより安全に検証可能。
+
+```dart
+if (p is Point) {
+  print('The type of p is Point');
+}
+```
