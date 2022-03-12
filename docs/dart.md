@@ -38,3 +38,23 @@ if (p is Point) {
   print('The type of p is Point');
 }
 ```
+
+### Style
+
+- `class`、`enum`、`typedef`などは`UpperCamelCase`を使う
+- 変数、定数、関数などは`lowerCamelCase`を使う
+- ライブラリ、パッケージ、ディレクトリ、ファイル名などは`lowercase_with_underscores`を使う
+- インポートプレフィックスは`lowercase_with_underscores`を使う
+
+  ```dart
+  import 'dart:math' as math;
+  import 'package:angular_components/angular_components' as angular_components;
+  ```
+
+- 未使用のコールバックパラメータは`_`や`__`と定義する
+
+  ```dart
+  futureObj.then((_) {
+    // callback
+  })
+  ```
