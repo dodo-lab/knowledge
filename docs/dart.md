@@ -58,3 +58,24 @@ if (p is Point) {
     // callback
   })
   ```
+
+### linterで検知できない[Effective Dart: Usage](https://dart.dev/guides/language/effective-dart/usage)
+
+- [`part of`を使う場合は相対パスで指定する](https://dart.dev/guides/language/effective-dart/usage#do-use-strings-in-part-of-directives)
+- [nullをbooleanに変換する場合は`??`を使う](https://dart.dev/guides/language/effective-dart/usage#prefer-using--to-convert-null-to-a-boolean-value)
+- [初期化されているか確認する必要があるなら`late`を使わない](https://dart.dev/guides/language/effective-dart/usage#avoid-late-variables-if-you-need-to-check-whether-they-are-initialized)
+- [nullableなフィールドをローカル変数にコピーして、型推論をさせる](https://dart.dev/guides/language/effective-dart/usage#avoid-late-variables-if-you-need-to-check-whether-they-are-initialized)
+- [型を変更する必要がなければ`List.from()`を使用しない](https://dart.dev/guides/language/effective-dart/usage#dont-use-listfrom-unless-you-intend-to-change-the-type-of-the-result)
+- [Generatorなどで済む場合は`cast()`を使わない](https://dart.dev/guides/language/effective-dart/usage#dont-use-cast-when-a-nearby-operation-will-do)
+- [可能な限り`cast()`を使わない](https://dart.dev/guides/language/effective-dart/usage#avoid-using-cast)
+- [`var`と`final`に一貫性を持たせる](https://dart.dev/guides/language/effective-dart/usage#do-follow-a-consistent-rule-for-var-and-final-on-local-variables)
+- [計算できるものをメンバとして保持しない](https://dart.dev/guides/language/effective-dart/usage#avoid-storing-what-you-can-calculate)
+- [コンストラクタに依存しないのであれば、宣言時に初期化する](https://dart.dev/guides/language/effective-dart/usage#do-initialize-fields-at-their-declaration-when-possible)
+- [コンストラクタの初期化リストで十分な場合は、`late`を使用しない](https://dart.dev/guides/language/effective-dart/usage#dont-use-late-when-a-constructor-initializer-list-will-do)
+- [`catch`したエラーを適切に処理し、不用意に破棄しない](https://dart.dev/guides/language/effective-dart/usage#dont-discard-errors-from-catches-without-on-clauses)
+- [プログラム上のエラーの場合のみ、Errorオブジェクトをスローする](https://dart.dev/guides/language/effective-dart/usage#do-throw-objects-that-implement-error-only-for-programmatic-errors)
+- [`Future`をそのまま使わず、`async/await`を使って可読性を上げる](https://dart.dev/guides/language/effective-dart/usage#prefer-asyncawait-over-using-raw-futures)
+- [有用な効果がない場合は`async`を使わない](https://dart.dev/guides/language/effective-dart/usage#prefer-asyncawait-over-using-raw-futures)
+- [`stream`を変換するために高階関数を利用する](https://dart.dev/guides/language/effective-dart/usage#consider-using-higher-order-methods-to-transform-a-stream)
+- [`Completer`を直接使わない](https://dart.dev/guides/language/effective-dart/usage#avoid-using-completer-directly)
+- [`FutureOr<T>`の型を明確にするため、`is Future<T>`で検証する](https://dart.dev/guides/language/effective-dart/usage#do-test-for-futuret-when-disambiguating-a-futureort-whose-type-argument-could-be-object)
