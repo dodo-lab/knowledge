@@ -19,6 +19,7 @@ module.exports = {
       },
       'max-kanji-continuous-len': {
         max: 6,
+        allow: ['倍精度浮動小数']
       },
     },
     'preset-jtf-style': {

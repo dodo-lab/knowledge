@@ -107,3 +107,28 @@ if (p is Point) {
 - [`null`や空文字などを受け入れる必須パラメータは避ける](https://dart.dev/guides/language/effective-dart/design#avoid-mandatory-parameters-that-accept-a-special-no-argument-value)
 - [範囲を指定する場合、開始と終了を含むパラメータを使用する](https://dart.dev/guides/language/effective-dart/design#do-use-inclusive-start-and-exclusive-end-parameters-to-accept-a-range)
 - [`==`演算子は数学的な等価関係に従う](https://dart.dev/guides/language/effective-dart/design#do-make-your--operator-obey-the-mathematical-rules-of-equality)
+
+### 数値の扱い
+
+対象のプラットフォームによって、次のように数値の扱いが変わる。
+
+||Native|Web|
+|---|---|---|
+|**int**|2の補数|倍精度浮動小数|
+|**double**|倍精度浮動小数|倍精度浮動小数|
+
+Webにおける`int`は小数部を含まない倍精度の値となる。
+そのため、`1.0`のような小数部が`0`の値は、Web上では`int`型／`double`型どちらにもなり得る。
+
+|Expression|Native|Web|
+|---|---|---|
+|1.0 == 1|true|true|
+|identical(1.0, 1)|false|true|
+|1 is int|true|true|
+|1 is double|false|true|
+|1.0 is int|false|true|
+|1.0 is double|true|true|
+|(0.5 + 0.5) is int|false|true|
+|1.runtimeType|int|int|
+|1.0.runtimeType|double|int|
+|1.5.runtimeType|double|double|
