@@ -132,3 +132,42 @@ Webにおける`int`は小数部を含まない倍精度の値となる。
 |1.runtimeType|int|int|
 |1.0.runtimeType|double|int|
 |1.5.runtimeType|double|double|
+
+### フローによる型推論にフィールドは適用されない
+
+次のコードはコンパイルエラーになる。
+
+```dart
+class Coffee {
+  String? _temperature;
+
+  void checkTemp() {
+    if (_temperature != null) {
+      print('Ready to serve ' + _temperature + '!');  // ★コンパイルエラー
+    }
+  }
+}
+```
+
+これは次の2パターンで回避可能。
+
+- `!`でnullableでないことを明示する
+
+  ```dart
+  void checkTemp() {
+    if (_temperature != null) {
+      print('Ready to serve ' + _temperature! + '!');
+    }
+  }
+  ```
+
+- ローカル変数に代入する
+
+  ```dart
+  void checkTemp() {
+    final temperature = _temperature;
+    if (temperature != null) {
+      print('Ready to serve ' + temperature + '!');
+    }
+  }
+  ```
