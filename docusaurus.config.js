@@ -48,7 +48,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
         title: 'Knowledge',
         logo: {
           alt: 'Knowledge Logo',
-          src: 'img/logo.svg',
+          src: 'img/robo.png',
+          srcDark: 'img/nu.png',
         },
         items: [
           {
@@ -58,7 +59,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
             label: 'Docs',
           },
           {
-            href: 'https://github.com/facebook/docusaurus',
+            href: 'https://github.com/dodo-lab',
             label: 'GitHub',
             position: 'right',
           },
