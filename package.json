@@ -19,7 +19,8 @@
     "fix": "run-s --print-name --continue-on-error fix:*",
     "fix:text": "textlint --fix \"*.md\" \"*.mdx\" \"!(node_modules|build)/**/*.md\" \"!(node_modules|build)/**/*.mdx\"",
     "fix:md": "markdownlint-cli2-fix \"**/*.md\" \"**/*.mdx\" \"#node_modules\" \"#build\"",
-    "fix:css": "stylelint --fix \"src/**/*.css\""
+    "fix:css": "stylelint --fix \"src/**/*.css\"",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@docusaurus/core": "2.0.0-beta.17",
@@ -47,7 +48,8 @@
     "textlint-filter-rule-comments": "^1.2.2",
     "textlint-rule-preset-ja-spacing": "^2.2.0",
     "textlint-rule-preset-ja-technical-writing": "^7.0.0",
-    "typescript": "^4.3.5"
+    "typescript": "^4.3.5",
+    "husky": "^7.0.4"
   },
   "browserslist": {
     "production": [
