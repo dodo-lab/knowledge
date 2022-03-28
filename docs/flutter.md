@@ -139,3 +139,17 @@ class User {
 - ChangeNotifierProvider
 
   データを更新する必要がある場合に利用。
+
+### context.watch()とcontext.read()の使い分け
+
+- context.watch()
+
+  受け取ったデータを元にUIを構築する場合に利用。
+
+- context.read()
+
+  受け取ったデータを元にUI構築以外の制御をする場合に利用。
+
+:::warning
+`context.read()`で問題ないパターンにおいて`context.watch()`を使ってしまうと、不必要な再描画が行われてパフォーマンス低下に繋がる。
+:::
