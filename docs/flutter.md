@@ -129,3 +129,13 @@ class User {
 + Map<String, dynamic> toJson() => _$UserToJson(this);
 }
 ```
+
+### ProviderとChangeNotifierProviderの使い分け
+
+- Provider
+
+  データを更新する必要がなく、子要素に受け渡すだけで良い場合に利用。
+
+- ChangeNotifierProvider
+
+  データを更新する必要がある場合に利用。
