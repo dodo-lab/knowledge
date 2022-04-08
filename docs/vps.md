@@ -24,31 +24,46 @@ sudo yum install -y nodejs
 
 ## Let's Encryptで証明書を作成
 
-- Certbotクライアントをインストール
+ドメインは仮で`www.example.com`とする。
 
-  ```bash title=コマンド実行
-  sudo yum install epel-release
-  sudo yum install certbot
-  ```
+### Certbotクライアントをインストール
 
-- 証明書を作成
+```bash title=コマンド実行
+sudo yum install epel-release
+sudo yum install certbot
+```
 
-  ドメインは仮で`www.example.com`とする。
+### 証明書を作成
 
-  ```bash title=コマンド実行
-  certbot certonly --standalone -d www.example.com
-  ```
+```bash title=コマンド実行
+certbot certonly --standalone -d www.example.com
+```
 
-  コマンド実行後にメールアドレスの入力や、利用規約への同意が求められるため、適宜対応する。
-  成功したら、`/etc/letsencrypt/live/www.example.com/`に各種証明書ファイルが生成される。
+コマンド実行後にメールアドレスの入力や、利用規約への同意が求められるため、適宜対応する。
+成功したら、`/etc/letsencrypt/live/www.example.com/`に各種証明書ファイルが生成される。
 
-  `fullchain.pem`を中間証明書を連結した証明書、`privkey.pem`を秘密鍵として扱う。
+`fullchain.pem`を中間証明書を連結した証明書、`privkey.pem`を秘密鍵として扱う。
 
-  :::warning
-  失敗した場合は下記項目をチェック。
-  - 80ポートや443ポートが他のプロセスやサービスに利用されている場合、該当のプロセスやサービスを一時停止する
-  - 80ポートや443ポートがファイアーウォールでブロックされている場合、該当ポートへのアクセスを許可する
-  :::
+:::info
+`/etc/letsencrypt/live/www.example.com`配下のファイルはシンボリックリンクになっており、実体は`/etc/letsencrypt/archive/www.example.com`にある。
+:::
+
+:::warning
+失敗した場合は下記項目をチェック。
+
+- 80ポートや443ポートが他のプロセスやサービスに利用されている場合、該当のプロセスやサービスを一時停止する
+- 80ポートや443ポートがファイアーウォールでブロックされている場合、該当ポートへのアクセスを許可する
+:::
+
+### 証明書の更新
+
+Let's Encryptの証明書の有効期限は3か月のため、定期的な更新が必要。
+
+```bash title=コマンド実行
+certbot renew
+```
+
+成功したら、`/etc/letsencrypt/live/www.example.com`の証明書と秘密鍵のファイルが更新される。必要に応じてサーバー側の再起動を実施。
 
 ## MySQLの導入
 
