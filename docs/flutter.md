@@ -10,6 +10,16 @@ title: Flutter
   flutter pub get
   ```
 
+- プラグインのプロジェクト作成
+
+  ```bash title=コマンド実行
+  # プラットフォーム側はKotlinとSwift
+  flutter create --template=plugin --org com.example --platforms=android,ios [plugin_name]
+
+  # プラットフォーム側はJavaとObjective-C
+  flutter create --template=plugin --org com.example --platforms=android,ios -a java -i objc [plugin_name]
+  ```
+
 ## リンク
 
 - [Flutter Docs](https://docs.flutter.dev/)
