@@ -26,3 +26,41 @@ const p: Person = {
 :::info
 `type`で同名の型を定義すると、エラーになる。
 :::
+
+### Nominal Types
+
+TypeScriptの型は構造で識別するため、`C++`や`Java`のように型名で互換性を識別できない。
+
+```ts
+type UserName = string;
+type ItemName = string;
+
+let user: UserName = "user_name";
+let item: ItemName = "item_name";
+
+// どちらの構造も`string`のため、代入できてしまう
+user = item;
+item = user;
+```
+
+型に`readonly`な`unique symbol`を埋め込むことで、型名で識別できるようになる。
+
+```ts
+type UserName = string & {readonly brand: unique symbol};
+type ItemName = string & {readonly brand: unique symbol};
+
+// 値は`Companion Object Pattern`で取得
+function UserName(name: string) {
+  return name as UserName;
+}
+function ItemName(name: string) {
+  return name as ItemName;
+}
+
+let user = UserName("user_name");
+let item = ItemName("item_name");
+
+// コンパイルエラーが発生!!
+user = item;
+item = user;
+```
