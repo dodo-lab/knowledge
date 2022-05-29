@@ -61,6 +61,8 @@ let user = UserName("user_name");
 let item = ItemName("item_name");
 
 // コンパイルエラーが発生!!
+// @ts-expect-error
 user = item;
+// @ts-expect-error
 item = user;
 ```
