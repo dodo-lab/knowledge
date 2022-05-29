@@ -96,3 +96,25 @@ item = user;
   // NoParams is never
   type NoParams = ParseRouteParams<"/api/user">;
   ```
+
+- オブジェクトのプロパティ名から動的にUnion Typesを生成
+
+  ```ts
+  type PropEventSource<T> = {
+    on(eventName: `${string & keyof T}Changed`, callback: () => void): void;
+  };
+
+  declare function makeWatchedObject<T>(obj: T): T & PropEventSource<T>;
+
+  const watch = makeWatchedObject({
+    name: 'Bob',
+    age: 25,
+  });
+
+  // OK
+  watch.on('nameChanged', () => {});
+  watch.on('ageChanged', () => {});
+
+  // NG
+  watch.on('genderChanged', () => {});
+  ```

@@ -10,6 +10,7 @@
     "epel",
     "fullchain",
     "Googlebot",
+    "keyof",
     "letsencrypt",
     "mbstring",
     "mkcert",
