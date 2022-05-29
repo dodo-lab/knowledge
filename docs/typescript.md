@@ -61,8 +61,25 @@ let user = UserName("user_name");
 let item = ItemName("item_name");
 
 // コンパイルエラーが発生!!
-// @ts-expect-error
 user = item;
-// @ts-expect-error
 item = user;
+```
+
+### Template Literal Types
+
+複数のUnion Typesをテンプレート文字列内で利用すると、各要素同士の組み合わせが定義可能。
+
+```ts
+type VerticalAlignment = "top" | "middle" | "bottom";
+type HorizontalAlignment = "left" | "center" | "right";
+
+function setAlignment(value: `${VerticalAlignment}-${HorizontalAlignment}`) {}
+
+// OK
+setAlignment("top-center");
+setAlignment("middle-left");
+
+// NG
+setAlignment("top-bottom");
+setAlignment("top-side");
 ```
