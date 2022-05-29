@@ -67,19 +67,32 @@ item = user;
 
 ### Template Literal Types
 
-複数のUnion Typesをテンプレート文字列内で利用すると、各要素同士の組み合わせが定義可能。
+- 複数のUnion Typesをテンプレート文字列内で利用すると、各要素同士の組み合わせが定義可能。
 
-```ts
-type VerticalAlignment = "top" | "middle" | "bottom";
-type HorizontalAlignment = "left" | "center" | "right";
+  ```ts
+  type VerticalAlignment = "top" | "middle" | "bottom";
+  type HorizontalAlignment = "left" | "center" | "right";
 
-function setAlignment(value: `${VerticalAlignment}-${HorizontalAlignment}`) {}
+  // value: 'top-left' | 'top-center' | 'top-right' | 'middle-left' | 'middle-center' | 'middle-right' | 'bottom-left' | 'bottom-center' | 'bottom-right'
+  function setAlignment(value: `${VerticalAlignment}-${HorizontalAlignment}`) {}
 
-// OK
-setAlignment("top-center");
-setAlignment("middle-left");
+  // OK
+  setAlignment("top-center");
+  setAlignment("middle-left");
 
-// NG
-setAlignment("top-bottom");
-setAlignment("top-side");
-```
+  // NG
+  setAlignment("top-bottom");
+  setAlignment("top-side");
+  ```
+
+- inferとの組み合わせでパラメータ名を抽出
+
+  ```ts
+  type ParseRouteParams<T> = T extends `${string}/:${infer P}` ? P : never;
+
+  // Params is 'userID'
+  type Params = ParseRouteParams<"/api/user/:userID">;
+
+  // NoParams is never
+  type NoParams = ParseRouteParams<"/api/user">;
+  ```
