@@ -13,7 +13,16 @@ go mod init [module_name]
 go mod init example.com/test
 ```
 
-### go.mod の自動更新
+### 依存関係の追加
+
+```bash title=コマンド実行
+go get [module_name]
+
+# '.'を指定すると、カレントディレクトリのコードの依存関係を追加する.
+go get .
+```
+
+### 依存関係の自動更新
 
 モジュール配下のソースコードから必要なモジュールを追加したり、不要なモジュールを削除してくれる。
 
@@ -28,6 +37,18 @@ go mod init example.com/test
 
   # 例
   go mod edit -replace example.com/test=../test
+```
+
+### ワークスペースの作成
+
+```bash title=コマンド実行
+go work init [モジュールのディレクトリ]
+```
+
+### ワークスペースにモジュールを追加
+
+```bash title=コマンド実行
+go work use [モジュールのディレクトリ]
 ```
 
 ### 実行
