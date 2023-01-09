@@ -130,3 +130,21 @@ item = user;
     -readonly [P in K]: T[P];
   } & Omit<T, K>;
   ```
+
+- RecursivePartial
+
+  すべてのプロパティに対して、再帰的に`Optional`を適用する。
+
+  ```ts
+  type RecursivePartial<T> = {
+    [P in keyof T]?: T[P] extends (infer U)[]
+      ? RecursivePartial<U>[]
+      : T[P] extends object
+      ? RecursivePartial<T[P]>
+      : T[P];
+  };
+  ```
+
+  :::warning
+  `Partial`は再帰的でない。
+  :::
