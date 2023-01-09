@@ -118,3 +118,15 @@ item = user;
   // NG
   watch.on('genderChanged', () => {});
   ```
+
+### Utility Types
+
+- Writable
+
+  指定した一部のプロパティのみ`readonly`を除外する。
+
+  ```ts
+  type Writable<T, K extends keyof T> = {
+    -readonly [P in K]: T[P];
+  } & Omit<T, K>;
+  ```
